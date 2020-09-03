@@ -48,6 +48,20 @@ export interface PropertyDefinition {
 }
 
 /**
+ * Defining the settings for a model
+ */
+export interface ModelSettings {
+  description?: string;
+  forceId?: boolean;
+  hiddenProperties?: string[];
+  scope?: object;
+  strict?: boolean;
+
+  // Other variable settings
+  [name: string]: any;
+}
+
+/**
  * See https://github.com/strongloop/loopback-datasource-juggler/issues/432
  */
 export interface PropertyForm {
@@ -70,7 +84,7 @@ export type RelationDefinitionMap = {
 export interface ModelDefinitionSyntax {
   name: string;
   properties?: {[name: string]: PropertyDefinition | PropertyType};
-  settings?: {[name: string]: any};
+  settings?: ModelSettings;
   relations?: RelationDefinitionMap;
   jsonSchema?: JsonSchemaWithExtensions;
   [attribute: string]: any;
@@ -82,7 +96,7 @@ export interface ModelDefinitionSyntax {
 export class ModelDefinition {
   readonly name: string;
   properties: {[name: string]: PropertyDefinition};
-  settings: {[name: string]: any};
+  settings: ModelSettings;
   relations: RelationDefinitionMap;
   // indexes: Map<string, any>;
   [attribute: string]: any; // Other attributes
